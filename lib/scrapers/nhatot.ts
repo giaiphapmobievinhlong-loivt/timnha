@@ -5,7 +5,7 @@ import {
   getNearbySchools,
   isWithinOneWeek,
 } from '../filters';
-import { MAX_PRICE } from '../constants';
+
 import type { ListingInsert, ScraperResult } from '../types';
 
 interface ChothotAd {
@@ -64,13 +64,11 @@ export async function scrapeNhatot(): Promise<ScraperResult> {
       for (const ad of data.ads) {
         if (!ad.subject) continue;
 
-        // --- Lọc chỉ lấy tin cho thuê ---
-        // Mua bán: giá thường > 500 triệu (500_000_000)
-        // Cho thuê: giá thường < 50 triệu/tháng
+        // Lọc chỉ lấy tin cho thuê (mua bán giá > 500 triệu)
         if (ad.price > 50_000_000) continue;
 
-        // Giá < 5 triệu/tháng
-        if (ad.price <= 0 || ad.price > MAX_PRICE) continue;
+        // Lưu DB tất cả <= 10M để UI có thể lọc nhiều mức giá
+        if (ad.price <= 0 || ad.price > 10_000_000) continue;
 
         // Ngày đăng từ list_time (milliseconds)
         const postedAt = new Date(ad.list_time);

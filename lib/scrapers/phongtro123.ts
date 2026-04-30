@@ -105,10 +105,10 @@ export async function scrapePhongtro123(): Promise<ScraperResult> {
   const allListings: ListingInsert[] = [];
   const seen = new Set<string>();
 
-  // URL cho nhà nguyên căn HCM trên phongtro123
+  // URL mới phongtro123 (cấu trúc /tinh-thanh/ho-chi-minh)
   const paths = [
-    '/tp-ho-chi-minh/nha-nguyen-can',
-    '/tp-ho-chi-minh/nha-tro',
+    '/tinh-thanh/ho-chi-minh',
+    '/tinh-thanh/ho-chi-minh/nha-nguyen-can',
   ];
 
   try {
