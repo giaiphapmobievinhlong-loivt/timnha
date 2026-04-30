@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { getAdminClient } from '@/lib/supabase';
 
 const PAGE_SIZE = 20;
 
@@ -16,6 +16,7 @@ export async function GET(req: NextRequest) {
   const multiFloor = searchParams.get('multiFloor') !== 'false';
   const minArea = parseInt(searchParams.get('minArea') || '0');
 
+  const supabase = getAdminClient();
   let query = supabase
     .from('listings')
     .select('*', { count: 'exact' })

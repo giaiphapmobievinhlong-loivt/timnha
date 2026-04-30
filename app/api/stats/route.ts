@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { getAdminClient } from '@/lib/supabase';
 
 export async function GET() {
+  const supabase = getAdminClient();
   const [totalRes, sourceRes, latestRes] = await Promise.all([
     supabase
       .from('listings')
