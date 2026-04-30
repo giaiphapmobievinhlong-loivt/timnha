@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   const page = Math.max(0, parseInt(searchParams.get('page') || '0'));
   const maxPrice = Math.min(
     parseInt(searchParams.get('maxPrice') || '5000000'),
-    5_000_000
+    10_000_000  // tối đa 10M để hỗ trợ filter 6M và 7M
   );
   const district = searchParams.get('district') || '';
   const source = searchParams.get('source') || '';
