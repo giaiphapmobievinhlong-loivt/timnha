@@ -107,7 +107,7 @@ export default function HomePage() {
                 🏠 Tìm Nhà Trọ HCM
               </h1>
               <p className="text-blue-200 text-sm mt-0.5">
-                Dưới 5 triệu · Có ít nhất 1 lầu · Loại trừ Q2, Q9, Thủ Đức · Cập nhật mỗi 15 phút
+                Dưới 7 triệu · Có ít nhất 1 lầu · Toàn TP.HCM · Cập nhật mỗi 15 phút
               </p>
             </div>
             <div className="hidden sm:flex flex-col items-end text-sm text-blue-200">
@@ -137,8 +137,8 @@ export default function HomePage() {
         <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-800 flex items-start gap-2">
           <span className="text-base flex-shrink-0">ℹ️</span>
           <span>
-            <strong>Điều kiện áp dụng:</strong> Giá &lt; 5 triệu/tháng · Nhà có ít nhất 1 trệt + 1 lầu ·
-            TP.HCM (trừ Quận 2, Quận 9, TP. Thủ Đức) · Đăng trong vòng 7 ngày.{' '}
+            <strong>Điều kiện áp dụng:</strong> Nhà có ít nhất 1 trệt + 1 lầu ·
+            Toàn TP.HCM (kể cả Q2, Q9, Thủ Đức) · Đăng trong vòng 7 ngày.{' '}
             <strong>Gợi ý:</strong> các tin có badge 🎓 gần trường học.
           </span>
         </div>

@@ -1,20 +1,14 @@
 export const MAX_PRICE = 5_000_000;
 
-// Các quận/huyện bị loại trừ (Q2, Q9 đã sáp nhập vào TP Thủ Đức)
-export const EXCLUDED_DISTRICT_KEYWORDS = [
-  'quận 2', 'quan 2', 'q.2', 'q2 ',
-  'quận 9', 'quan 9', 'q.9', 'q9 ',
-  'thủ đức', 'thu duc', 'thuduc',
-  'tp. thủ đức', 'tp thủ đức', 'thành phố thủ đức',
-  'district 2', 'district 9',
-];
+// Không loại trừ quận nào — người dùng tự chọn qua filter
+export const EXCLUDED_DISTRICT_KEYWORDS: string[] = [];
 
-// Danh sách quận/huyện hợp lệ tại TP.HCM
+// Danh sách quận/huyện tại TP.HCM (bao gồm Q2, Q9, Thủ Đức)
 export const VALID_DISTRICTS = [
-  'Quận 1', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6',
-  'Quận 7', 'Quận 8', 'Quận 10', 'Quận 11', 'Quận 12',
+  'Quận 1', 'Quận 2', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6',
+  'Quận 7', 'Quận 8', 'Quận 9', 'Quận 10', 'Quận 11', 'Quận 12',
   'Bình Thạnh', 'Gò Vấp', 'Phú Nhuận', 'Tân Bình', 'Tân Phú',
-  'Bình Chánh', 'Cần Giờ', 'Củ Chi', 'Hóc Môn', 'Nhà Bè',
+  'Thủ Đức', 'Bình Chánh', 'Cần Giờ', 'Củ Chi', 'Hóc Môn', 'Nhà Bè',
 ];
 
 // Trường học theo quận/huyện
