@@ -23,6 +23,9 @@ function buildListingsUrl(filters: FilterState, page: number): string {
   if (filters.source && filters.source !== 'all') {
     params.set('source', filters.source);
   }
+  if (filters.frontage) {
+    params.set('frontage', 'true');
+  }
   return `/api/listings?${params}`;
 }
 
@@ -31,6 +34,7 @@ export default function HomePage() {
     district: 'all',
     maxPrice: 5_000_000,
     multiFloor: true,
+    frontage: false,
     source: 'all',
   });
   const [page, setPage] = useState(0);

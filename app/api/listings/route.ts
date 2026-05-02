@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
   const source = searchParams.get('source') || '';
   const multiFloor = searchParams.get('multiFloor') !== 'false';
   const minArea = parseInt(searchParams.get('minArea') || '0');
+  const frontage = searchParams.get('frontage') === 'true';
 
   const supabase = getAdminClient();
   let query = supabase
@@ -40,6 +41,10 @@ export async function GET(req: NextRequest) {
 
   if (minArea > 0) {
     query = query.gte('area', minArea);
+  }
+
+  if (frontage) {
+    query = query.ilike('title', '%mặt tiền%');
   }
 
   const { data, error, count } = await query;

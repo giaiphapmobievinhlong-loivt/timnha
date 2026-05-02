@@ -45,5 +45,6 @@ export interface FilterState {
   district: string;
   maxPrice: number;
   multiFloor: boolean;
+  frontage: boolean;
   source: string;
 }

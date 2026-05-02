@@ -95,6 +95,22 @@ export default function FilterBar({ filters, onChange, total, isLoading }: Props
             <span className="text-xs font-medium text-slate-600">Có lầu</span>
           </label>
 
+          {/* Toggle mặt tiền */}
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <div className="relative">
+              <input
+                type="checkbox"
+                className="sr-only"
+                checked={filters.frontage}
+                onChange={e => update({ frontage: e.target.checked })}
+              />
+              <div className={`w-10 h-5 rounded-full transition-colors ${filters.frontage ? 'bg-blue-500' : 'bg-slate-200'}`}>
+                <div className={`w-4 h-4 bg-white rounded-full shadow transform transition-transform absolute top-0.5 ${filters.frontage ? 'translate-x-5' : 'translate-x-0.5'}`} />
+              </div>
+            </div>
+            <span className="text-xs font-medium text-slate-600">Mặt tiền</span>
+          </label>
+
           {/* Kết quả */}
           <div className="ml-auto flex items-center gap-2">
             {isLoading && (
