@@ -24,6 +24,7 @@ const SOURCE_OPTIONS = [
   { label: 'Nhatot.com', value: 'nhatot' },
   { label: 'PhongTro123', value: 'phongtro123' },
   { label: 'Mogi.vn', value: 'batdongsan' },
+  { label: 'Alonhadat.vn', value: 'alonhadat' },
 ];
 
 export default function FilterBar({ filters, onChange, total, isLoading }: Props) {

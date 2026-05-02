@@ -158,7 +158,8 @@ export default function HomePage() {
             Dữ liệu thu thập tự động từ{' '}
             <a href="https://www.nhatot.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Nhatot.com</a>,{' '}
             <a href="https://phongtro123.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">PhongTro123</a>,{' '}
-            <a href="https://mogi.vn" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Mogi.vn</a>.
+            <a href="https://mogi.vn" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Mogi.vn</a>,{' '}
+            <a href="https://alonhadat.com.vn" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Alonhadat.vn</a>.
             Cập nhật tự động mỗi 15 phút · Tin trong 7 ngày gần nhất.
           </p>
         </div>

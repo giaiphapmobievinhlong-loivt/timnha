@@ -99,10 +99,12 @@ export const SOURCE_LABELS: Record<string, string> = {
   nhatot: 'Nhatot.com',
   phongtro123: 'PhongTro123',
   batdongsan: 'BatDongSan',
+  alonhadat: 'Alonhadat.vn',
 };
 
 export const SOURCE_COLORS: Record<string, string> = {
   nhatot: 'bg-orange-100 text-orange-700',
   phongtro123: 'bg-green-100 text-green-700',
   batdongsan: 'bg-purple-100 text-purple-700',
+  alonhadat: 'bg-blue-100 text-blue-700',
 };

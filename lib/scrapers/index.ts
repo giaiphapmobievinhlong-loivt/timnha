@@ -2,6 +2,7 @@ import { getAdminClient } from '../supabase';
 import { scrapeNhatot } from './nhatot';
 import { scrapePhongtro123 } from './phongtro123';
 import { scrapeMogi } from './mogi';
+import { scrapeAlonhadat } from './alonhadat';
 import type { ListingInsert, ScraperReport } from '../types';
 
 export async function runAllScrapers(): Promise<ScraperReport> {
@@ -10,10 +11,11 @@ export async function runAllScrapers(): Promise<ScraperReport> {
   const sources: Record<string, number> = {};
 
   // Chạy tất cả scrapers song song
-  const [nhatotRes, phongtro123Res, mogiRes] = await Promise.allSettled([
+  const [nhatotRes, phongtro123Res, mogiRes, alonhadatRes] = await Promise.allSettled([
     scrapeNhatot(),
     scrapePhongtro123(),
     scrapeMogi(),
+    scrapeAlonhadat(),
   ]);
 
   if (nhatotRes.status === 'fulfilled') {
@@ -41,6 +43,15 @@ export async function runAllScrapers(): Promise<ScraperReport> {
   } else {
     errors.push(`mogi: ${String(mogiRes.reason)}`);
     sources.mogi = 0;
+  }
+
+  if (alonhadatRes.status === 'fulfilled') {
+    if (alonhadatRes.value.error) errors.push(`alonhadat: ${alonhadatRes.value.error}`);
+    allListings.push(...alonhadatRes.value.listings);
+    sources.alonhadat = alonhadatRes.value.listings.length;
+  } else {
+    errors.push(`alonhadat: ${String(alonhadatRes.reason)}`);
+    sources.alonhadat = 0;
   }
 
   let inserted = 0;

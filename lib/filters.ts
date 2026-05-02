@@ -9,6 +9,7 @@ const MULTI_FLOOR_PATTERNS = [
   /\d+\s*tầng/i,
   /nhà\s*lầu/i,
   /có\s*gác/i,
+  /trệt\s*gác/i,
   /gác\s*lửng/i,
   /nhà\s*2\s*tầng/i,
   /nhà\s*3\s*tầng/i,

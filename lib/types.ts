@@ -1,4 +1,4 @@
-export type Source = 'nhatot' | 'phongtro123' | 'batdongsan';
+export type Source = 'nhatot' | 'phongtro123' | 'batdongsan' | 'alonhadat';
 
 export interface Listing {
   id: string;
