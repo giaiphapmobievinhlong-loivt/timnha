@@ -67,8 +67,8 @@ export async function scrapeNhatot(): Promise<ScraperResult> {
         // Lọc chỉ lấy tin cho thuê (mua bán giá > 500 triệu)
         if (ad.price > 50_000_000) continue;
 
-        // Lưu DB tất cả <= 10M để UI có thể lọc nhiều mức giá
-        if (ad.price <= 0 || ad.price > 10_000_000) continue;
+        // Lưu DB tất cả <= 20M để UI có thể lọc nhiều mức giá (incl. mặt tiền)
+        if (ad.price <= 0 || ad.price > 20_000_000) continue;
 
         // Ngày đăng từ list_time (milliseconds)
         const postedAt = new Date(ad.list_time);

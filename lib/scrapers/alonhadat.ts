@@ -11,8 +11,8 @@ import type { ListingInsert, ScraperResult } from '../types';
 
 const BASE_URL = 'https://alonhadat.com.vn';
 
-// gia=1: <1M, 2: 1-3M, 3: 3-5M, 4: 5-10M
-const PRICE_TIERS = [1, 2, 3, 4];
+// gia=1: <1M, 2: 1-3M, 3: 3-5M, 4: 5-10M, 5: 10-15M, 6: 15-20M
+const PRICE_TIERS = [1, 2, 3, 4, 5, 6];
 const PAGES_PER_TIER = 3;
 
 async function fetchPage(url: string): Promise<string | null> {
@@ -60,7 +60,7 @@ function parseItem(
   // Price: <span itemprop="price" content="9000000">
   const priceContent = item.find('span[itemprop="price"]').attr('content') || '0';
   const price = parseInt(priceContent, 10);
-  if (price <= 0 || price > 10_000_000) return null;
+  if (price <= 0 || price > 20_000_000) return null;
 
   // Description (brief paragraph)
   const description = item.find('p.brief').text().trim() || null;

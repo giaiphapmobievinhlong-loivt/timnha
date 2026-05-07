@@ -17,6 +17,8 @@ const PRICE_OPTIONS = [
   { label: 'Dưới 5 triệu', value: 5_000_000 },
   { label: 'Dưới 6 triệu', value: 6_000_000 },
   { label: 'Dưới 7 triệu', value: 7_000_000 },
+  { label: 'Dưới 10 triệu', value: 10_000_000 },
+  { label: 'Dưới 15 triệu', value: 15_000_000 },
 ];
 
 const SOURCE_OPTIONS = [
