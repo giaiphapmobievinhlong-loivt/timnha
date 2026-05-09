@@ -7,8 +7,6 @@ import StatsBar from '@/components/StatsBar';
 import ListingGrid from '@/components/ListingGrid';
 import type { FilterState, ListingsResponse } from '@/lib/types';
 
-const REFRESH_INTERVAL = 15 * 60; // 15 phút (giây)
-
 const fetcher = (url: string) => fetch(url).then(r => r.json());
 
 function buildListingsUrl(filters: FilterState, page: number): string {
@@ -39,19 +37,14 @@ export default function HomePage() {
   });
   const [page, setPage] = useState(0);
   const [allListings, setAllListings] = useState<ListingsResponse['listings']>([]);
-  const [countdown, setCountdown] = useState(REFRESH_INTERVAL);
 
-  // Fetch listings với SWR (auto-refresh mỗi 15 phút)
   const listingsUrl = buildListingsUrl(filters, page);
   const { data, isLoading, mutate } = useSWR<ListingsResponse>(listingsUrl, fetcher, {
-    refreshInterval: REFRESH_INTERVAL * 1000,
     revalidateOnFocus: false,
     keepPreviousData: true,
   });
 
-  // Stats
-  const { data: stats } = useSWR('/api/stats', fetcher, {
-    refreshInterval: REFRESH_INTERVAL * 1000,
+  const { data: stats, mutate: mutateStats } = useSWR('/api/stats', fetcher, {
     revalidateOnFocus: false,
   });
 
@@ -77,20 +70,12 @@ export default function HomePage() {
     }
   }, [data, page]);
 
-  // Đếm ngược đến lần refresh tiếp theo
-  useEffect(() => {
-    setCountdown(REFRESH_INTERVAL);
-    const timer = setInterval(() => {
-      setCountdown(c => {
-        if (c <= 1) {
-          mutate();
-          return REFRESH_INTERVAL;
-        }
-        return c - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [mutate]);
+  const handleRefresh = useCallback(() => {
+    setPage(0);
+    setAllListings([]);
+    mutate();
+    mutateStats();
+  }, [mutate, mutateStats]);
 
   const handleLoadMore = useCallback(() => {
     setPage(p => p + 1);
@@ -111,7 +96,7 @@ export default function HomePage() {
                 🏠 Tìm Nhà Trọ HCM
               </h1>
               <p className="text-blue-200 text-sm mt-0.5">
-                Dưới 7 triệu · Có ít nhất 1 lầu · Toàn TP.HCM · Cập nhật mỗi 15 phút
+                Dưới 7 triệu · Có ít nhất 1 lầu · Toàn TP.HCM
               </p>
             </div>
             <div className="hidden sm:flex flex-col items-end text-sm text-blue-200">
@@ -125,7 +110,7 @@ export default function HomePage() {
       </header>
 
       {/* Stats bar */}
-      <StatsBar stats={stats} nextRefresh={countdown} />
+      <StatsBar stats={stats} isRefreshing={isLoading} onRefresh={handleRefresh} />
 
       {/* Filter bar */}
       <FilterBar
@@ -164,7 +149,7 @@ export default function HomePage() {
             <a href="https://phongtro123.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">PhongTro123</a>,{' '}
             <a href="https://mogi.vn" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Mogi.vn</a>,{' '}
             <a href="https://alonhadat.com.vn" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Alonhadat.vn</a>.
-            Cập nhật tự động mỗi 15 phút · Tin trong 7 ngày gần nhất.
+            Tin trong 7 ngày gần nhất.
           </p>
         </div>
       </footer>

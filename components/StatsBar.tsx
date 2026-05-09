@@ -12,10 +12,11 @@ interface Stats {
 
 interface Props {
   stats: Stats | null;
-  nextRefresh: number; // giây còn lại
+  isRefreshing: boolean;
+  onRefresh: () => void;
 }
 
-export default function StatsBar({ stats, nextRefresh }: Props) {
+export default function StatsBar({ stats, isRefreshing, onRefresh }: Props) {
   if (!stats) return null;
 
   const lastScrapedText = stats.lastScraped
@@ -24,9 +25,6 @@ export default function StatsBar({ stats, nextRefresh }: Props) {
         locale: vi,
       })
     : 'Chưa có dữ liệu';
-
-  const minutes = Math.floor(nextRefresh / 60);
-  const seconds = nextRefresh % 60;
 
   return (
     <div className="bg-blue-50 border-b border-blue-100">
@@ -49,10 +47,20 @@ export default function StatsBar({ stats, nextRefresh }: Props) {
           {/* Cập nhật lần cuối */}
           <span className="text-blue-500">Cập nhật {lastScrapedText}</span>
 
-          {/* Đếm ngược refresh */}
-          <span className="ml-auto font-mono text-blue-500 tabular-nums">
-            ⏱ {minutes}:{String(seconds).padStart(2, '0')} đến lần quét tiếp
-          </span>
+          {/* Nút làm mới */}
+          <button
+            onClick={onRefresh}
+            disabled={isRefreshing}
+            className="ml-auto flex items-center gap-1.5 px-3 py-1 rounded-md bg-blue-100 hover:bg-blue-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium text-blue-700"
+          >
+            <svg
+              className={`w-3 h-3 ${isRefreshing ? 'animate-spin' : ''}`}
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+            >
+              <path d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0 1 15-4.5M20 15a9 9 0 0 1-15 4.5" strokeLinecap="round"/>
+            </svg>
+            {isRefreshing ? 'Đang tải...' : 'Làm mới'}
+          </button>
         </div>
       </div>
     </div>
